@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # ===== Sistem Peminjaman Buku di Perpustakaan =====
 
@@ -77,10 +77,10 @@ def cari_buku():
                 print(tabulate(cari, headers=header, tablefmt="grid"))
 
         else:
-              print("\nTidak ada hasil yang ditemukan!")
+              print("\nTidak ada buku yang ditemukan!")
 
 def cari_buku_by_judul(judul):
-        """Fungsi untuk mencari buku berdasarkan judul, mengembalikan objek buku"""
+        # Fungsi untuk mencari buku berdasarkan judul dan mengembalikan objek buku
         for buku in daftar_buku:
             if judul.lower() in buku["judul"].lower():
                 return buku
@@ -119,15 +119,8 @@ def pinjam_buku():
         # validasi tanggal
         try:
                 tanggal_pinjam_input = input("Tanggal Pinjam (DD-MM-YYYY): ")
-                tanggal_kembali_input = input("Tanggal Kembali (DD-MM-YYYY): ")
-
                 tanggal_pinjam = datetime.strptime(tanggal_pinjam_input, "%d-%m-%Y")
-                tanggal_kembali = datetime.strptime(tanggal_kembali_input, "%d-%m-%Y")
-
-                if tanggal_kembali <= tanggal_pinjam:
-                        print("Tanggal kembali harus setelah tanggal pinjam!")
-                        return
-        
+                tanggal_kembali = tanggal_pinjam + timedelta(days=10)
         except ValueError:
                 print("Format tanggal salah! Gunakan Format DD-MM-YYYY")
                 return
@@ -144,6 +137,8 @@ def pinjam_buku():
         data_peminjam.append(data)
         buku_dipinjam["stok"] -= 1
         print(f"Buku '{buku_dipinjam['judul']}' berhasil dipinjam!")
+        print(f"Tanggal Kembali Otomatis: {tanggal_kembali.strftime('%d-%m-%Y')}")
+
 
 def tampil_data_peminjam():
         if not data_peminjam:
@@ -164,6 +159,7 @@ def pengembalian_buku():
         if not data_peminjam:
                 print("Tidak ada data peminjam")
                 return
+        
         tampil_data_peminjam()
         try:
                 id_kembali = int(input("Masukkan ID peminjam untuk pengembalian: "))
@@ -172,6 +168,22 @@ def pengembalian_buku():
                                 
                                 #Kembalikan stok buku
                                 judul_dikembalikan = peminjam["Judul Buku"]
+                                tgl_kembali_str = peminjam["Tanggal Kembali"]
+                                tgl_kembali = datetime.strptime(tgl_kembali_str, "%d-%m-%Y")
+                                try:
+                                        tgl_pengembalian_input = input("Masukkan tanggal pengembalian (DD-MM-YYYY): ")
+                                        tgl_pengembalian = datetime.strptime(tgl_pengembalian_input, "%d-%m-%Y")
+                                except ValueError:
+                                        print("Format tanggal salah! Gunakan format DD-MM-YYYY.")
+                                        return
+                                # Apakah terlambat dikembalikan atau tepat waktu
+                                if tgl_pengembalian > tgl_kembali:
+                                        selisih = (tgl_pengembalian - tgl_kembali).days
+                                        print(f"⚠️ Pengembalian terlambat {selisih} hari!")
+                                else:
+                                        print("Buku dikembalikan tepat waktu.")
+
+
                                 buku_dikembalikan = cari_buku_by_judul(judul_dikembalikan)
                                 if buku_dikembalikan:
                                         buku_dikembalikan["stok"] += 1
@@ -240,7 +252,7 @@ def hapus_buku():
                                                 
         print("ID buku tidak ditemukan!")
 
-
+# loop menu utama
 while True:
     menu_perpus()
     pilihan = input("\nPilih Menu: ")
