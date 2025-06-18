@@ -14,14 +14,17 @@
 # Features:
 ###**Create**
 - Add new borrower data when borrowing books.
+
 ###**Read**
 - Display full list of available books.
 - View borrower records.
 - Search books by title or author.
+
 ###**Update**
 - Edit book information (title, author, category, stock).
 - **Delete**
 - Remove a book by its `id_buku`.
+
 ###**Utilities**
 - Borrow a book with automatic return date (10 days).
 - Prevent duplicate borrowing of the same book by one user.
