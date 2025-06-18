@@ -12,17 +12,17 @@
 - Staff Library
 - 
 # Features:
-- **Create**
+###**Create**
 - Add new borrower data when borrowing books.
-- **Read**
+###**Read**
 - Display full list of available books.
 - View borrower records.
 - Search books by title or author.
-- **Update**
+###**Update**
 - Edit book information (title, author, category, stock).
 - **Delete**
 - Remove a book by its `id_buku`.
-- **Utilities**
+###**Utilities**
 - Borrow a book with automatic return date (10 days).
 - Prevent duplicate borrowing of the same book by one user.
 - Return a book and check for overdue days.
@@ -40,3 +40,17 @@ pip install tabulate
 # Usage
 ### Run the application:
 python main.py
+
+# Data Model
+### Book Data (daftar_buku)
+- id_buku (String, Primary Key): Unique identifier for each book (e.g., "B1").
+- judul (String): Title of the book.
+- penulis (String): Author of the book.
+- kategori (String): Category or genre of the book (e.g., Novel, Motivasi, Biografi).
+- stok (Integer): Number of available copies in the library.
+### Borrower Data (data_peminjam)
+- ID (Integer, Primary Key): Unique identifier for each borrower transaction.
+- Nama Peminjam (String): Name of the person borrowing the book.
+- Judul Buku (String): Title of the book being borrowed.
+- Tanggal Pinjam (Date, format: DD-MM-YYYY): The date the book was borrowed.
+- Tanggal Kembali (Date, format: DD-MM-YYYY): The due date for returning the book (10 days after borrowing).
