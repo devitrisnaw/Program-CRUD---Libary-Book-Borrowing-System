@@ -34,7 +34,7 @@ UTILITIES
 
 # Installation
 ### 1. Clone the repository
-git clone https://github.com/yourusername/CRUDProgram-Library_Borrowing_System.git
+```bash git clone https://github.com/devitrisnaw/CRUDProgram-Library_Borrowing_System.git```
 cd CRUDProgram-Library_Borrowing_System
 pip install -r requirements.txt
 
