@@ -35,10 +35,10 @@ UTILITIES
 # Installation
 ### 1. Clone the repository
 ```bash 
-git clone https://github.com/devitrisnaw/CRUDProgram-Library_Borrowing_System.git```
+git clone https://github.com/devitrisnaw/CRUDProgram-Library_Borrowing_System.git
 cd CRUDProgram-Library_Borrowing_System
 pip install -r requirements.txt
-
+```
 ### Install dependencies
 pip install tabulate
 
