@@ -12,20 +12,21 @@
 - Staff Library
   
 # Features:
-###**Create**
+CREATE
 - Add new borrower data when borrowing books.
 
-###**Read**
+READ
 - Display full list of available books.
 - View borrower records.
 - Search books by title or author.
 
-###**Update**
+UPDATE
 - Edit book information (title, author, category, stock).
-- **Delete**
+
+DELETE
 - Remove a book by its `id_buku`.
 
-###**Utilities**
+UTILITIES
 - Borrow a book with automatic return date (10 days).
 - Prevent duplicate borrowing of the same book by one user.
 - Return a book and check for overdue days.
